@@ -8,7 +8,7 @@ my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
 my $JSON = JSON->new;
 $ua->agent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:74.0.1) Gecko/20100101 Firefox/74.0.1");
-
+print $q->header;
 my $destination = $q->param("destination");
 print "<!DOCTYPE html>\n";
 print "<html>\n";
@@ -18,7 +18,6 @@ print "<meta name='viewport' content='width=device-width, initial-scale=1' />\n"
 print "<link rel='stylesheet' href='/style.css' />\n";
 print "</head>";
 print "<body>\n";
-print $q->header;
 print $q->h1("r/".$destination);
 print "<ul>\n";
 my $json_data = $JSON->decode($ua->get("https://old.reddit.com/r/$destination/.json?&limit=20")->content);
