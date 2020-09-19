@@ -40,7 +40,7 @@ for (my $i = 0; $i<20;$i++) {
 	print "</div>\n<p />";
       }
   }
-  print "<li>\n<h2>$title</h2><br/>\n";
+  print "<li>\n<h2>$title A:$author</h2>\n";
   if ($is_image) {
     print "<a href='/printpost.cgi?post=$link'>\n<img src='$proxy_url' alt='Click to view post'>\n</a>";
   }
