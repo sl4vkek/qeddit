@@ -46,7 +46,7 @@ for (my $i = 0; $i<20;$i++) {
     print "<a href='/printpost.cgi?post=$link'>\n<img src='$proxy_url' alt='Click to view post'>\n</a>";
   }
   else {
-    print "<a href='/printpost.cgi?post=$link'></a>\n<a href='$url'>$url</a>\n";
+    print "<a href='$url'>$url</a>\n<br/>\n<a href='/printpost.cgi?post=$link'>Click to view comments</a>\n";
   }
   print "</li>\n";
   }
