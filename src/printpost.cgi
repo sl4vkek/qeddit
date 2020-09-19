@@ -4,8 +4,6 @@ use JSON;
 use LWP::UserAgent;
 use CGI;
 use HTML::Entities;
-# use utf8;
-
 my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
 my $JSON = JSON->new;
@@ -16,21 +14,19 @@ my $json_data = $JSON->decode($ua->get("https://old.reddit.com/$post/.json")->co
 my $num_comments = $json_data->[0]->{data}->{children}->[0]->{data}->{num_comments};
 print $q->h2($json_data->[0]->{data}->{children}->[0]->{data}->{title});
 my $post = $json_data->[0]->{data}->{children}->[0]->{data}->{selftext_html};
-my $post_img = $json_data->[0]->{data}->{children}->[0]->{data}->{url_overridden_by_dest};
+# my $post_img = $json_data->[0]->{data}->{children}->[0]->{data}->{url_overridden_by_dest};
 
-print "<img src=\"$post_img\" alt=\"image\"/>" if $post_img;
+# print "<img src=\"$post_img\" alt=\"image\"/>" if $post_img;
 
 $post =~ s/&gt;/>/g;
 $post =~ s/&lt;/</g;
-decode_entities($post);
-print $post;
+print decode_entities($post);
+
 print $q->h3("comments");
 
 for (my $i = 1;$i<$num_comments;$i++) {
-  $meta = "<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ";
-  decode_entities($meta);
-  print $meta;;
-  print $json_data->[1]->{data}->{children}->[$i]->{data}->{body};
+  print decode_entities("<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ");
+  print decode_entities($json_data->[1]->{data}->{children}->[$i]->{data}->{body});
   print "<br/><br/>";
 
 }
