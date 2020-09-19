@@ -3,6 +3,7 @@
 use JSON;
 use LWP::UserAgent;
 use CGI;
+# use utf8;
 
 my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
@@ -16,5 +17,5 @@ my $json_data = $JSON->decode($ua->get("https://old.reddit.com/r/$destination/.j
 for (my $i = 0; $i<20;$i++) {
   my $link =$json_data->{data}->{children}->[$i]->{data}->{permalink};
   $link =~ s/\///;
-  print "<a href='/redditclient/printpost.cgi?post=$link'>$json_data->{data}->{children}->[$i]->{data}->{title}</a>" . "<br/>";
+  print "<a href='/printpost.cgi?post=$link'>$json_data->{data}->{children}->[$i]->{data}->{title}</a>" . "<br/>";
 }

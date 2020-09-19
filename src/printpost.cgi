@@ -3,6 +3,9 @@
 use JSON;
 use LWP::UserAgent;
 use CGI;
+use HTML::Entities;
+# use utf8;
+
 my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
 my $JSON = JSON->new;
@@ -19,12 +22,14 @@ print "<img src=\"$post_img\" alt=\"image\"/>" if $post_img;
 
 $post =~ s/&gt;/>/g;
 $post =~ s/&lt;/</g;
+decode_entities($post);
 print $post;
-
 print $q->h3("comments");
 
 for (my $i = 1;$i<$num_comments;$i++) {
-  print "<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ";
+  $meta = "<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ";
+  decode_entities($meta);
+  print $meta;;
   print $json_data->[1]->{data}->{children}->[$i]->{data}->{body};
   print "<br/><br/>";
 
