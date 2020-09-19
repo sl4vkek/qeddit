@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /printdata.cgi
+Disallow: /printpost.cgi
+Disallow: /proxy.cgi

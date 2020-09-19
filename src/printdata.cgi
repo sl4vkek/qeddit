@@ -32,7 +32,7 @@ for (my $i = 0; $i<20;$i++) {
   my $proxy_url = "proxy.cgi?url=$url";
   my $is_image;
 
-  if ($url =~ /.*(jpg|png)/i) {
+  if ($url =~ /.*(jpg|jpeg|png|gif|webm|mp4)/i) {
     $is_image = 1;
   }
   if($i % 5 == 0) {
@@ -42,7 +42,12 @@ for (my $i = 0; $i<20;$i++) {
       }
   }
   print "<li>\n<h2>$title</h2><br/>\n";
-  print "<a href='/printpost.cgi?post=$link'>\n<img src='$proxy_url' alt='Click to view post'>\n</a>";
+  if ($is_image) {
+    print "<a href='/printpost.cgi?post=$link'>\n<img src='$proxy_url' alt='Click to view post'>\n</a>";
+  }
+  else {
+    print "<a href='/printpost.cgi?post=$link'></a>\n<a href='$url'>$url</a>\n";
+  }
   print "</li>\n";
   }
 
