@@ -17,7 +17,7 @@ my $post = $json_data->[0]->{data}->{children}->[0]->{data}->{selftext_html};
 # my $post_img = $json_data->[0]->{data}->{children}->[0]->{data}->{url_overridden_by_dest};
 
 # print "<img src=\"$post_img\" alt=\"image\"/>" if $post_img;
-
+print "<link rel='stylesheet' href='/style.css'>";
 $post =~ s/&gt;/>/g;
 $post =~ s/&lt;/</g;
 print decode_entities($post);
