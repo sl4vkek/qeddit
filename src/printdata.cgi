@@ -18,7 +18,7 @@ print "<meta name='viewport' content='width=device-width, initial-scale=1' />\n"
 print "<link rel='stylesheet' href='/style.css' />\n";
 print "</head>";
 print "<body>\n";
-# print $q->header;
+print $q->header;
 print $q->h1("r/".$destination);
 print "<ul>\n";
 my $json_data = $JSON->decode($ua->get("https://old.reddit.com/r/$destination/.json?&limit=20")->content);
