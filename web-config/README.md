@@ -16,7 +16,7 @@ Configure it to your liking.
 `cd /srv/http`<br/>
 `git clone https://github.com/sl4vkek/qeddit.git`<br/>
 `mv ./qeddit/src/* ./`<br/>
-rm -rf ./qeddit
+`rm -rf ./qeddit`
 ### Systemd stuff
 `systemctl enable lighttpd`<br/>
 `systemctl restart lighttpd`
