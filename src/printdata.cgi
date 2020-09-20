@@ -7,7 +7,9 @@ use CGI;
 my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
 my $JSON = JSON->new;
-$ua->agent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:74.0.1) Gecko/20100101 Firefox/74.0.1");
+do "./qeddit-config.cgi";
+#$ua->agent("Mozilla/5.0 (Windows NT 10.0; WOW64; rv:74.0.1) Gecko/20100101 Firefox/74.0.1");
+$ua->agent($useragent);
 print $q->header;
 my $destination = $q->param("destination");
 print "<!DOCTYPE html>\n";
@@ -42,10 +44,13 @@ for (my $i = 0; $i<20;$i++) {
   }
   print "<li>\n<h2>$title A:$author</h2>\n";
   if ($is_image) {
-    print "<a href='/printpost.cgi?post=$link'>\n<img src='$proxy_url' alt='Click to view post'>\n</a>";
+    if ($useproxy == 1) {
+      $url = $proxy_url;
+    }
+    print "<a href='printpost.cgi?post=$link'>\n<img src='$url' alt='Click to view post'>\n</a>";
   }
   else {
-    print "<a href='$url'>$url</a>\n<br/>\n<a href='/printpost.cgi?post=$link'>Click to view comments</a>\n";
+    print "<a href='$url'>$url</a>\n<br/>\n<a href='printpost.cgi?post=$link'>Click to view comments</a>\n";
   }
   print "</li>\n";
   }
