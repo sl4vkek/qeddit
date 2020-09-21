@@ -21,13 +21,16 @@ my $post = $json_data->[0]->{data}->{children}->[0]->{data}->{selftext_html};
 print "<link rel='stylesheet' href='/style.css'>";
 $post =~ s/&gt;/>/g;
 $post =~ s/&lt;/</g;
-print decode_entities($post);
+#print decode_entities($post);
+print $post;
 
 print $q->h3("comments");
 
 for (my $i = 1;$i<$num_comments;$i++) {
-  print decode_entities("<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ");
-  print decode_entities($json_data->[1]->{data}->{children}->[$i]->{data}->{body});
+  #print decode_entities("<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ");
+  #print decode_entities($json_data->[1]->{data}->{children}->[$i]->{data}->{body});
+  print "<b>$json_data->[1]->{data}->{children}->[$i]->{data}->{author} :</b>  ";
+  print $json_data->[1]->{data}->{children}->[$i]->{data}->{body};
   print "<br/><br/>";
 
 }
