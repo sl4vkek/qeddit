@@ -3,7 +3,7 @@
 use JSON;
 use LWP::UserAgent;
 use CGI;
-
+use HTML::Entities;
 my $q = CGI->new;
 my $ua = LWP::UserAgent->new;
 my $JSON = JSON->new;
@@ -12,6 +12,7 @@ do "./qeddit-config.cgi";
 $ua->agent($useragent);
 print $q->header;
 my $destination = $q->param("destination");
+$destination = encode_entities($destination);
 print "<!DOCTYPE html>\n";
 print "<html>\n";
 print "<head>\n";
@@ -24,9 +25,9 @@ print $q->h1("r/".$destination);
 print "<ul>\n";
 my $json_data = $JSON->decode($ua->get("https://old.reddit.com/r/$destination/.json?&limit=20")->content);
 for (my $i = 0; $i<20;$i++) {
-  my $title = $json_data->{data}->{children}->[$i]->{data}->{title};
-  my $author = $json_data->{data}->{children}->[$i]->{data}->{author};
-  my $content = $json_data->{data}->{children}->[$i]->{data}->{selftext_html};
+  my $title = encode_entities($json_data->{data}->{children}->[$i]->{data}->{title});
+  my $author = encode_entities($json_data->{data}->{children}->[$i]->{data}->{author});
+  # my $content = $json_data->{data}->{children}->[$i]->{data}->{selftext_html};
   my $url = $json_data->{data}->{children}->[$i]->{data}->{url};
   my $link = $json_data->{data}->{children}->[$i]->{data}->{permalink};
   $link =~ s/\///;
@@ -39,7 +40,7 @@ for (my $i = 0; $i<20;$i++) {
   if($i % 5 == 0) {
     if($x > 0)
       {
-	print "</div>\n<p />";
+        print "</div>\n<p />";
       }
   }
   print "<li>\n<h2>$title A:$author</h2>\n";
